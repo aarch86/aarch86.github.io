@@ -5,7 +5,7 @@
 <title>shell</title>
 </head>
 
-<body style="background:black; color:#00ff00; font-family:monospace;">
+<body>
 
 <pre>
 total 48
@@ -19,15 +19,15 @@ drwxr-xr-x 3 root root 4096 Feb 20 10:25 uploads
 -rw-r--r-- 1 root root  921 Jun 13 01:55 .env
 </pre>
 
-<input id="cmd" style="background:black; color:#00ff00; border:none; font-family:monospace;" placeholder="command">
-<button id="run" style="background:black; color:#00ff00; border:1px solid #00ff00;">Run</button>
+<input id="cmd" placeholder="command">
+<button id="run">Run</button>
 
-<div id="gif" style="display:none; position:fixed; inset:0; background:black;">
+<div id="gif" style="display:none;">
     <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjBnczgydDBlcmExeDAyNmJ5OXNmcWZmZWJ6dW50ZDM3Y3FjNWdsZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GCO5WNzFmlc0vjK8cA/giphy.gif">
 </div>
 
 <script>
-document.getElementById("run").onclick = () => {
+document.getElementById("run").onclick = function(){
     document.getElementById("gif").style.display = "block";
 };
 </script>
