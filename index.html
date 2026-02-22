@@ -7,6 +7,9 @@
 
 <body>
 
+<input id="cmd" placeholder="enter command...">
+<button id="run">Run</button>
+
 <pre>
 total 48
 drwxr-xr-x 5 root root 4096 Feb 21 02:10 .
@@ -19,16 +22,10 @@ drwxr-xr-x 3 root root 4096 Feb 20 10:25 uploads
 -rw-r--r-- 1 root root  921 Jun 13 01:55 .env
 </pre>
 
-<input id="cmd" placeholder="command">
-<button id="run">Run</button>
-
-<div id="gif" style="display:none;">
-    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjBnczgydDBlcmExeDAyNmJ5OXNmcWZmZWJ6dW50ZDM3Y3FjNWdsZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GCO5WNzFmlc0vjK8cA/giphy.gif">
-</div>
-
 <script>
 document.getElementById("run").onclick = function(){
-    document.getElementById("gif").style.display = "block";
+    document.body.innerHTML =
+        '<img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjBnczgydDBlcmExeDAyNmJ5OXNmcWZmZWJ6dW50ZDM3Y3FjNWdsZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GCO5WNzFmlc0vjK8cA/giphy.gif">';
 };
 </script>
 
