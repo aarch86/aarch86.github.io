@@ -1,230 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domain For Sale</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<title>Domain Available</title>
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            overflow: hidden;
-        }
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial;
+    background:#f6f8fc;
+}
 
-        .container {
-            text-align: center;
-            padding: 50px 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            max-width: 480px;
-            width: 90%;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
+.card{
+    width:520px;
+    background:white;
+    padding:60px 70px 40px;
+    border-radius:18px;
+    box-shadow:0 20px 45px rgba(0,0,0,0.08);
+    text-align:center;
+    position:relative;
+}
 
-        .domain-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
-        }
+.domain{
+    font-size:30px;
+    font-weight:600;
+    margin-bottom:8px;
+}
 
-        .domain-icon svg {
-            width: 28px;
-            height: 28px;
-            fill: #fff;
-        }
+.subtitle{
+    color:#666;
+    margin-bottom:35px;
+}
 
-        h1 {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #667eea;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
+#buyBtn{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    padding:15px 34px;
+    border:none;
+    border-radius:12px;
+    background:#4f46e5;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(79,70,229,0.35);
+    transition:0.15s ease;
+}
 
-        .domain-name {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, #fff, #ccc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+.badges{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin-top:80px;
+    opacity:.55;
+    font-size:13px;
+}
 
-        p {
-            color: #999;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            font-size: 15px;
-        }
+#gifOverlay{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.9);
+    z-index:999;
+}
 
-        .btn-wrapper {
-            display: flex;
-            justify-content: center;
-        }
-
-        .check-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            border: none;
-            padding: 14px 32px;
-            font-size: 15px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: box-shadow 0.15s;
-            font-family: inherit;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .check-btn:hover {
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .check-btn svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        .check-btn.moved {
-            position: fixed;
-            z-index: 100;
-        }
-
-        .gif-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .gif-overlay img {
-            max-width: 80%;
-            max-height: 80%;
-            border-radius: 16px;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 40px;
-            color: #fff;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .close-btn:hover {
-            opacity: 0.7;
-        }
-    </style>
+#gifOverlay img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:14px;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="domain-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-            </svg>
-        </div>
-        <h1>Domain For Sale</h1>
-        <div class="domain-name" id="domainName">example.com</div>
-        <p>Congratulations! This domain is available to purchase. Hurry up before someone else does!</p>
-        <div class="btn-wrapper">
-            <button class="check-btn" id="checkBtn">
-                Visit to Buy
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                </svg>
-            </button>
-        </div>
+
+<div class="card">
+    <div class="domain">yourdomain.com</div>
+    <div class="subtitle">This premium domain is ready for instant secure purchase.</div>
+    <button id="buyBtn">Visit to Buy →</button>
+
+    <div class="badges">
+        <span>🔒 Secure checkout</span>
+        <span>⚡ Instant transfer</span>
+        <span>🛡 Buyer protection</span>
     </div>
+</div>
 
-    <div class="gif-overlay" id="gifOverlay">
-        <span class="close-btn" id="closeBtn">&times;</span>
-        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjBnczgydDBlcmExeDAyNmJ5OXNmcWZmZWJ6dW50ZDM3Y3FjNWdsZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GCO5WNzFmlc0vjK8cA/giphy.gif" alt="Surprise!">
-    </div>
+<div id="gifOverlay">
+    <img id="gifImg" src="">
+</div>
 
-    <script>
-        const btn = document.getElementById('checkBtn');
-        const overlay = document.getElementById('gifOverlay');
-        const closeBtn = document.getElementById('closeBtn');
-        
-        let clickCount = 0;
-        let hasMoved = false;
+<script>
+const btn = document.getElementById("buyBtn");
+const gifOverlay = document.getElementById("gifOverlay");
+const gifImg = document.getElementById("gifImg");
 
-        function getRandomPosition() {
-            const padding = 80;
-            const btnRect = btn.getBoundingClientRect();
-            
-            const maxX = window.innerWidth - btnRect.width - padding;
-            const maxY = window.innerHeight - btnRect.height - padding;
-            
-            const x = Math.max(padding, Math.random() * maxX);
-            const y = Math.max(padding, Math.random() * maxY);
-            
-            return { left: x, top: y };
-        }
+let clicks = 0;
+let dodgeEnabled = false;
 
-        btn.addEventListener('click', function(e) {
-            clickCount++;
-            
-            if (clickCount >= 3) {
-                overlay.style.display = 'flex';
-                return;
-            }
+setTimeout(()=> dodgeEnabled = true, 1200);
 
-            if (!hasMoved) {
-                btn.classList.add('moved');
-                hasMoved = true;
-            }
+function moveBtn(){
+    const pad = 120;
+    const x = Math.random() * (window.innerWidth - pad);
+    const y = Math.random() * (window.innerHeight - pad);
 
-            const pos = getRandomPosition();
-            btn.style.left = pos.left + 'px';
-            btn.style.top = pos.top + 'px';
-        });
+    btn.style.left = x+"px";
+    btn.style.top = y+"px";
+    btn.style.transform = "none";
+}
 
-        closeBtn.addEventListener('click', function() {
-            overlay.style.display = 'none';
-        });
+document.addEventListener("mousemove", e=>{
+    if(!dodgeEnabled) return;
 
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                overlay.style.display = 'none';
-            }
-        });
+    const rect = btn.getBoundingClientRect();
+    const distX = Math.abs(e.clientX - (rect.left + rect.width/2));
+    const distY = Math.abs(e.clientY - (rect.top + rect.height/2));
 
-        const domainName = document.getElementById('domainName');
-        domainName.textContent = window.location.hostname || 'this-domain.com';
-    </script>
+    if(distX < 90 && distY < 60){
+        moveBtn();
+    }
+});
+
+btn.addEventListener("click", ()=>{
+    clicks++;
+    moveBtn();
+
+    if(clicks === 3){
+        gifImg.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjBnczgydDBlcmExeDAyNmJ5OXNmcWZmZWJ6dW50ZDM3Y3FjNWdsZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GCO5WNzFmlc0vjK8cA/giphy.gif";
+        gifOverlay.style.display = "flex";
+    }
+});
+</script>
+
 </body>
 </html>
