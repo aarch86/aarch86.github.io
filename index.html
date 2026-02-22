@@ -36,16 +36,21 @@
         }
 
         .domain-icon {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 16px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 24px;
-            font-size: 32px;
             box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .domain-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff;
         }
 
         h1 {
@@ -74,26 +79,40 @@
             font-size: 15px;
         }
 
+        .btn-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
         .check-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
             border: none;
-            padding: 14px 40px;
+            padding: 14px 32px;
             font-size: 15px;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.15s, box-shadow 0.15s;
+            transition: box-shadow 0.15s;
             font-family: inherit;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .check-btn:hover {
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .check-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .check-btn.moved {
+            position: fixed;
+            z-index: 100;
         }
 
         .gif-overlay {
@@ -132,13 +151,23 @@
 </head>
 <body>
     <div class="container">
-        <div class="domain-icon">🌐</div>
+        <div class="domain-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+        </div>
         <h1>Domain For Sale</h1>
         <div class="domain-name" id="domainName">example.com</div>
-        <p>This domain may be available for purchase. Inquire below to check availability and pricing.</p>
+        <p>Congratulations! This domain is available to purchase. Hurry up before someone else does!</p>
+        <div class="btn-wrapper">
+            <button class="check-btn" id="checkBtn">
+                Visit to Buy
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                </svg>
+            </button>
+        </div>
     </div>
-
-    <button class="check-btn" id="checkBtn">Check Availability</button>
 
     <div class="gif-overlay" id="gifOverlay">
         <span class="close-btn" id="closeBtn">&times;</span>
@@ -151,19 +180,19 @@
         const closeBtn = document.getElementById('closeBtn');
         
         let clickCount = 0;
+        let hasMoved = false;
 
         function getRandomPosition() {
             const padding = 80;
-            const btnWidth = 180;
-            const btnHeight = 50;
+            const btnRect = btn.getBoundingClientRect();
             
-            const maxX = window.innerWidth - btnWidth - padding;
-            const maxY = window.innerHeight - btnHeight - padding;
+            const maxX = window.innerWidth - btnRect.width - padding;
+            const maxY = window.innerHeight - btnRect.height - padding;
             
             const x = Math.max(padding, Math.random() * maxX);
             const y = Math.max(padding, Math.random() * maxY);
             
-            return { left: x + 'px', top: y + 'px' };
+            return { left: x, top: y };
         }
 
         btn.addEventListener('click', function(e) {
@@ -174,17 +203,14 @@
                 return;
             }
 
-            const pos = getRandomPosition();
-            
-            btn.style.left = pos.left;
-            btn.style.top = pos.top;
-            btn.style.transform = 'translate(0, 0)';
-            
-            if (clickCount === 1) {
-                btn.textContent = 'Checking...';
-            } else {
-                btn.textContent = 'Almost there...';
+            if (!hasMoved) {
+                btn.classList.add('moved');
+                hasMoved = true;
             }
+
+            const pos = getRandomPosition();
+            btn.style.left = pos.left + 'px';
+            btn.style.top = pos.top + 'px';
         });
 
         closeBtn.addEventListener('click', function() {
