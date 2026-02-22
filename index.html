@@ -2,134 +2,102 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Domain Available</title>
+<title>shell</title>
 
 <style>
 body{
     margin:0;
-    height:100vh;
+    background:#0b0f0b;
+    font-family:monospace;
+    color:#33ff33;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial;
-    background:#f6f8fc;
+    height:100vh;
 }
 
-.card{
-    width:520px;
-    background:white;
-    padding:60px 70px 40px;
-    border-radius:18px;
-    box-shadow:0 20px 45px rgba(0,0,0,0.08);
-    text-align:center;
-    position:relative;
+.terminal{
+    width:720px;
+    background:#000;
+    border-radius:8px;
+    padding:18px 20px 25px;
+    box-shadow:0 0 25px rgba(0,255,0,.15);
 }
 
-.domain{
-    font-size:30px;
-    font-weight:600;
-    margin-bottom:8px;
+.output{
+    white-space:pre;
+    font-size:14px;
+    line-height:1.35;
+    margin-bottom:12px;
 }
 
-.subtitle{
-    color:#666;
-    margin-bottom:35px;
-}
-
-#buyBtn{
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    padding:15px 34px;
-    border:none;
-    border-radius:12px;
-    background:#4f46e5;
-    color:white;
-    font-size:17px;
-    cursor:pointer;
-    box-shadow:0 8px 18px rgba(79,70,229,0.35);
-    transition:0.15s ease;
-}
-
-.badges{
+.cmd{
     display:flex;
-    justify-content:center;
-    gap:25px;
-    margin-top:80px;
-    opacity:.55;
-    font-size:13px;
+    gap:10px;
+}
+
+input{
+    flex:1;
+    background:#000;
+    border:1px solid #1f3;
+    color:#3f3;
+    padding:6px 8px;
+    font-family:monospace;
+}
+
+button{
+    background:#021;
+    border:1px solid #1f3;
+    color:#3f3;
+    padding:6px 14px;
+    cursor:pointer;
 }
 
 #gifOverlay{
     position:fixed;
     inset:0;
+    background:black;
     display:none;
     justify-content:center;
     align-items:center;
-    background:rgba(0,0,0,.9);
     z-index:999;
 }
 
 #gifOverlay img{
     max-width:90%;
     max-height:90%;
-    border-radius:14px;
 }
 </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="domain">jamesmcalonan.co.uk</div>
-    <div class="subtitle">Congratulations! This domain is available for purchase</div>
-    <button id="buyBtn">Visit to Buy →</button>
+<div class="terminal">
+<div class="output">
+total 48
+drwxr-xr-x 5 root root 4096 Feb 21 02:10 .
+drwxr-xr-x 3 root root 4096 Feb 20 21:41 ..
+-rw-r--r-- 1 root root  532 Feb 19 14:03 main.py
+-rw-r--r-- 1 root root  214 Feb 19 14:03 config.py
+drwxr-xr-x 2 root root 4096 Feb 20 10:22 pages
+drwxr-xr-x 2 root root 4096 Feb 20 10:22 assets
+drwxr-xr-x 3 root root 4096 Feb 20 10:25 uploads
+-rw-r--r-- 1 root root  921 Jun 13 01:55 .env
+</div>
+
+<div class="cmd">
+<input placeholder="Enter Command">
+<button id="runBtn">Run</button>
+</div>
 </div>
 
 <div id="gifOverlay">
-    <img id="gifImg" src="">
+<img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjBnczgydDBlcmExeDAyNmJ5OXNmcWZmZWJ6dW50ZDM3Y3FjNWdsZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GCO5WNzFmlc0vjK8cA/giphy.gif">
 </div>
 
 <script>
-const btn = document.getElementById("buyBtn");
-const gifOverlay = document.getElementById("gifOverlay");
-const gifImg = document.getElementById("gifImg");
-
-let clicks = 0;
-let dodgeEnabled = false;
-
-setTimeout(()=> dodgeEnabled = true, 1200);
-
-function moveBtn(){
-    const pad = 120;
-    const x = Math.random() * (window.innerWidth - pad);
-    const y = Math.random() * (window.innerHeight - pad);
-
-    btn.style.left = x+"px";
-    btn.style.top = y+"px";
-    btn.style.transform = "none";
-}
-
-document.addEventListener("mousemove", e=>{
-    if(!dodgeEnabled) return;
-
-    const rect = btn.getBoundingClientRect();
-    const distX = Math.abs(e.clientX - (rect.left + rect.width/2));
-    const distY = Math.abs(e.clientY - (rect.top + rect.height/2));
-
-    if(distX < 90 && distY < 60){
-        moveBtn();
-    }
-});
-
-btn.addEventListener("click", ()=>{
-    clicks++;
-    moveBtn();
-
-    if(clicks === 3){
-        gifImg.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjBnczgydDBlcmExeDAyNmJ5OXNmcWZmZWJ6dW50ZDM3Y3FjNWdsZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GCO5WNzFmlc0vjK8cA/giphy.gif";
-        gifOverlay.style.display = "flex";
-    }
-});
+document.getElementById("runBtn").onclick = () => {
+    document.getElementById("gifOverlay").style.display = "flex";
+};
 </script>
 
 </body>
