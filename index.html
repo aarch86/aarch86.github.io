@@ -1,78 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>shell</title>
-
-<style>
-body{
-    margin:0;
-    background:#0b0f0b;
-    font-family:monospace;
-    color:#33ff33;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.terminal{
-    width:720px;
-    background:#000;
-    border-radius:8px;
-    padding:18px 20px 25px;
-    box-shadow:0 0 25px rgba(0,255,0,.15);
-}
-
-.output{
-    white-space:pre;
-    font-size:14px;
-    line-height:1.35;
-    margin-bottom:12px;
-}
-
-.cmd{
-    display:flex;
-    gap:10px;
-}
-
-input{
-    flex:1;
-    background:#000;
-    border:1px solid #1f3;
-    color:#3f3;
-    padding:6px 8px;
-    font-family:monospace;
-}
-
-button{
-    background:#021;
-    border:1px solid #1f3;
-    color:#3f3;
-    padding:6px 14px;
-    cursor:pointer;
-}
-
-#gifOverlay{
-    position:fixed;
-    inset:0;
-    background:black;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:999;
-}
-
-#gifOverlay img{
-    max-width:90%;
-    max-height:90%;
-}
-</style>
 </head>
-<body>
 
-<div class="terminal">
-<div class="output">
+<body style="background:black; color:#00ff00; font-family:monospace;">
+
+<pre>
 total 48
 drwxr-xr-x 5 root root 4096 Feb 21 02:10 .
 drwxr-xr-x 3 root root 4096 Feb 20 21:41 ..
@@ -82,21 +17,18 @@ drwxr-xr-x 2 root root 4096 Feb 20 10:22 pages
 drwxr-xr-x 2 root root 4096 Feb 20 10:22 assets
 drwxr-xr-x 3 root root 4096 Feb 20 10:25 uploads
 -rw-r--r-- 1 root root  921 Jun 13 01:55 .env
-</div>
+</pre>
 
-<div class="cmd">
-<input placeholder="Enter Command">
-<button id="runBtn">Run</button>
-</div>
-</div>
+<input id="cmd" style="background:black; color:#00ff00; border:none; font-family:monospace;" placeholder="command">
+<button id="run" style="background:black; color:#00ff00; border:1px solid #00ff00;">Run</button>
 
-<div id="gifOverlay">
-<img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjBnczgydDBlcmExeDAyNmJ5OXNmcWZmZWJ6dW50ZDM3Y3FjNWdsZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GCO5WNzFmlc0vjK8cA/giphy.gif">
+<div id="gif" style="display:none; position:fixed; inset:0; background:black;">
+    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjBnczgydDBlcmExeDAyNmJ5OXNmcWZmZWJ6dW50ZDM3Y3FjNWdsZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GCO5WNzFmlc0vjK8cA/giphy.gif">
 </div>
 
 <script>
-document.getElementById("runBtn").onclick = () => {
-    document.getElementById("gifOverlay").style.display = "flex";
+document.getElementById("run").onclick = () => {
+    document.getElementById("gif").style.display = "block";
 };
 </script>
 
